@@ -1,5 +1,10 @@
 
-variable "vpc_parameters" {
+variable "vpc_parameters_1" {
+  description = "VPC parameter"
+  type        = map(string)
+}
+
+variable "vpc_parameters_2" {
   description = "VPC parameter"
   type        = map(string)
 }
@@ -14,4 +19,8 @@ variable "sg_ingress_cidr" {
   type        = string
 }
 
+variable "ec2_specs" {
+  description = "Instance parameters"
+  type        = map(string)
+}
 

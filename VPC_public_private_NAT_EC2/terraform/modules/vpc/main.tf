@@ -1,4 +1,3 @@
-
 resource "aws_vpc" "vpc" {
   cidr_block           = var.vpc_cidr
   enable_dns_support   = true
@@ -19,6 +18,7 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_subnet" "private_subnet" {
+  count                   = var.private_subnet_cidr != null ? 1 : 0
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.private_subnet_cidr
   availability_zone       = var.private_subnet_az
@@ -67,25 +67,25 @@ resource "aws_vpc_security_group_ingress_rule" "allow_ssh_ingress_traffic_ipv4" 
   ip_protocol       = "tcp"
   to_port           = 22
   tags = {
-    Name = "Allow SSH ingress rule-${local.sufix}"
+    Name = "Allow SSH traffic from sg_ingress_cidr ingress rule-${local.sufix}"
   }
 }
 
 resource "aws_vpc_security_group_ingress_rule" "allow_all_ingress_traffic_in_public_subnet" {
   security_group_id = aws_security_group.sg_public_subnet.id
-  cidr_ipv4         = var.public_subnet_cidr
+  cidr_ipv4         = var.private_subnet_cidr
   ip_protocol       = "-1" # semantically equivalent to all ports
   tags = {
-    Name = "Allow all traffic public subnet ingress rule-${local.sufix}"
+    Name = "Allow all ipv4 traffic from private subnet ingress rule-${local.sufix}"
   }
 }
 
 resource "aws_vpc_security_group_egress_rule" "allow_all_egress_traffic_ipv4" {
   security_group_id = aws_security_group.sg_public_subnet.id
-  cidr_ipv4         = var.sg_ingress_cidr
+  cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1" # semantically equivalent to all ports
   tags = {
-    Name = "Allow all ipv4 traffic public subnet egress rule-${local.sufix}"
+    Name = "Allow all ipv4 traffic to every whare egress rule-${local.sufix}"
   }
 }
 
