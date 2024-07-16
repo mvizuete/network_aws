@@ -1,10 +1,5 @@
 
-variable "vpc_parameters_1" {
-  description = "VPC parameter"
-  type        = map(string)
-}
-
-variable "vpc_parameters_2" {
+variable "vpc_parameters" {
   description = "VPC parameter"
   type        = map(string)
 }
@@ -23,4 +18,6 @@ variable "ec2_specs" {
   description = "Instance parameters"
   type        = map(string)
 }
+
+
 

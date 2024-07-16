@@ -1,10 +1,11 @@
 
 resource "aws_instance" "public_instance" {
-  ami           = var.ami
-  instance_type = var.instance_type
-  subnet_id     = var.subnet_id
-  key_name      = data.aws_key_pair.key.key_name
-  # vpc_security_group_ids = [aws_security_group.sg_public_instance.id]
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  subnet_id              = var.subnet_id
+  key_name               = data.aws_key_pair.key.key_name
+  vpc_security_group_ids = [var.vpc_security_group_id]
+
   # user_data              = <<-EOF
   #   #!/bin/bash
   #   echo "Este es un mensaje" > ~/mensaje.txt

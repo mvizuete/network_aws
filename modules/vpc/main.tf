@@ -18,11 +18,11 @@ resource "aws_subnet" "public_subnet" {
 }
 
 resource "aws_subnet" "private_subnet" {
-  count                   = var.private_subnet_cidr != null ? 1 : 0
+  # count                   = var.private_subnet_cidr != null ? 1 : 0
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.private_subnet_cidr
   availability_zone       = var.private_subnet_az
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
   tags = {
     "Name" = "Private_Subnet-${local.sufix}"
   }

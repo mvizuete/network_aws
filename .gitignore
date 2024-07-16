@@ -1,1 +1,3 @@
 /VPC_public_private_NAT_EC2/terraform/.terraform/*
+/Transit_gateway/terraform/.terraform/*
+/Site-to-Site_VPN/terraform/.terraform/*

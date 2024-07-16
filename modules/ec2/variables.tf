@@ -12,6 +12,11 @@ variable "instance_type" {
 }
 
 variable "subnet_id" {
-  description = "Subnet IDe"
+  description = "Subnet ID"
+  type        = string
+}
+
+variable "vpc_security_group_id" {
+  description = "Security group ID"
   type        = string
 }
